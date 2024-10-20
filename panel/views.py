@@ -79,7 +79,7 @@ class UserUpdateView(AdminPermissionMixin, generic.UpdateView):
 
 
 @login_required
-@user_passes_test(lambda u: u.user_role == 'head', login_url='accounts:login_view')
+@user_passes_test(lambda u: u.user_role == 'head' or 'admin', login_url='accounts:login_view')
 def delete_user(request, user_id):
     user = CustomUser.objects.get(pk=user_id)
     user.delete()

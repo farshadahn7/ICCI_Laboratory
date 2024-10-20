@@ -117,7 +117,7 @@
                                         <div class="action_btns d-flex">
                                             <a href="{% url 'panel:verify_user' new_user.id %}"
                                                class="action_btn mr_10"> Verify </a>
-                                            <a href="" class="action_btn"> <i class="fas fa-trash"></i> </a>
+                                            <a href="{% url 'panel:delete_user' new_user.id %}" class="action_btn"> <i class="fas fa-trash"></i> </a>
                                         </div>
                                     {% endif %}
                                 </div>
