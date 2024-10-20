@@ -4,7 +4,7 @@
         <div class="widget">
             <div class="widget-author">
                 <div class="author-img">
-                    <a href="" class="image">
+                    <a href="{% if alumni_member.personal_website %}{{ alumni_member.personal_website }}{% endif %}" class="image">
                         <img src="{{ alumni_member.user_image.url }}" alt="{{ alumni_member.full_name }}">
                     </a>
                 </div>
@@ -20,25 +20,35 @@
                         <ul class="list-inline">
                             {% if alumni_member.linkedin_url is not None %}
                                 <li>
-                                    <a href="https://{{ alumni_member.linkedin_url }}" target="_blank" class="color-linkedin">
+                                    <a href="https://{{ alumni_member.linkedin_url }}" target="_blank"
+                                       class="color-linkedin">
                                         <i class="fab la-linkedin color-linkedin"></i>
                                     </a>
                                 </li>
                             {% endif %}
                             {% if alumni_member.telegram_url is not None %}
                                 <li>
-                                    <a href="https://{{ alumni_member.telegram_url }}" target="_blank" class="color-telegram">
+                                    <a href="https://{{ alumni_member.telegram_url }}" target="_blank"
+                                       class="color-telegram">
                                         <i class="fab la-telegram color-telegram"></i>
                                     </a>
                                 </li>
                             {% endif %}
                             {% if alumni_member.email is not None %}
                                 <li>
-                                    <a href="{{ alumni_member.email }}" class="color-telegram">
+                                    <a href="mailto:{{ alumni_member.email }}" class="color-telegram">
                                         <i class="fa-regular fa-envelope color-telegram"></i>
                                     </a>
                                 </li>
                             {% endif %}
+                            {% if alumni_member.personal_website is not None %}
+                                <li>
+                                    <a href="https://{{ alumni_member.personal_website }}" target="_blank" class="color-telegram">
+                                        <i class="fa-regular fa fa-globe  color-telegram"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
                         </ul>
                     </div>
                 </div>

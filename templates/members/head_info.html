@@ -30,6 +30,13 @@
                         </a>
                     </li>
                 {% endif %}
+                {% if head_info.personal_website is not None %}
+                    <li>
+                        <a href="https://{{ head_info.personal_website }}" target="_blank" class="color-telegram">
+                            <i class="fa-regular fa fa-globe  color-telegram" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
