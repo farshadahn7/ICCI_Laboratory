@@ -3,10 +3,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
 import re
+from django.core.exceptions import ValidationError
 
 
 def check(email):
-    regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
+    regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     if re.fullmatch(regex, email):
         return True
 
@@ -33,7 +34,8 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = CustomUser
         fields = (
-        'username', 'first_name', 'last_name', 'email', 'user_image', 'linkedin_url', 'telegram_url', 'bio', 'position')
+            'username', 'first_name', 'last_name', 'email', 'user_image', 'linkedin_url', 'telegram_url', 'bio',
+            'position')
 
 
 class CustomUserForm(forms.ModelForm):
@@ -71,3 +73,25 @@ class SignupForm(UserCreationForm):
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'password1', 'password2']
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if check(email):
+            if CustomUser.objects.filter(email__iexact=email).exists():
+                self._update_errors(
+                    ValidationError(
+                        {
+                            "email": self.instance.unique_error_message(
+                                self._meta.model, ["email"]
+                            )
+                        }
+                    )
+                )
+            else:
+                return email
+        else:
+            self._update_errors(
+                ValidationError(
+                    f"Invalid {email} input"
+                )
+            )

@@ -58,7 +58,7 @@ class SignupView(generic.CreateView):
             messages.success(request, "registered successfully. Message sent for ICCI LAB's head for verification.")
             return redirect('accounts:login_view')
         else:
-            messages.error(request, "oops you may entered invalid inputs try again.")
+            messages.error(request, form.errors)
             return redirect('accounts:signup_view')
 
 
