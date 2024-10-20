@@ -43,7 +43,7 @@
                                         <!--Post-1-->
                                         <div class="post-list">
                                             <div class="post-list-image">
-                                                <a href="{% url 'posts:details' post.id %}">
+                                                <a href="{% url 'posts:details' post.slug %}">
                                                     <img src="{{ post.image.url }}" alt="">
                                                 </a>
                                             </div>
@@ -53,7 +53,7 @@
                                                 </div>
 
                                                 <h4 class="entry-title">
-                                                    <a href="{% url 'posts:details' post.id %}">{{ post.title|truncatewords:15|safe }}</a>
+                                                    <a href="{% url 'posts:details' post.slug %}">{{ post.title|truncatewords:15|safe }}</a>
                                                 </h4>
 
                                                 <div class="post-exerpt">

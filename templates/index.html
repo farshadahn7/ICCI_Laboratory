@@ -74,7 +74,7 @@
                                     <div class="col-lg-6 col-md-6 masonry-item">
                                         <div class="post-card ">
                                             <div class="post-card-image">
-                                                <a href="{% url 'posts:details' post.id %}">
+                                                <a href="{% url 'posts:details' post.slug %}">
                                                     <img src="{{ post.image.url }}" alt="">
                                                 </a>
                                             </div>
@@ -84,7 +84,7 @@
                                                 </div>
 
                                                 <h5 class="entry-title">
-                                                    <a href="{% url 'posts:details' post.id %}">{{ post.title }}</a>
+                                                    <a href="{% url 'posts:details' post.slug %}">{{ post.title }}</a>
                                                 </h5>
 
                                                 <div class="post-exerpt">
