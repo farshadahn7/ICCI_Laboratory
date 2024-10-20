@@ -1,0 +1,36 @@
+{% load static %}
+{#{% load account_tags %}#}
+<div class="widget-author">
+    <div class="author-img">
+        <a href="https://ce.aut.ac.ir/~farbeh/" class="image">
+            <img src="{{ head_info.user_image.url }}" alt="{{ head_info.full_name }}">
+        </a>
+    </div>
+    <div class="author-content">
+        <h6 class="name"> {{ head_info.full_name }}</h6>
+        <p class="position">
+            {{ head_info.position }}
+        </p>
+        <p class="bio">
+            <strong>{{ head_info.bio }}</strong>
+        </p>
+        <div class="social-media">
+            <ul class="list-inline">
+                {% if head_info.linkedin_url is not None %}
+                    <li>
+                        <a href="https://{{ head_info.linkedin_url }}" target="_blank" class="color-linkedin">
+                            <i class="fab la-linkedin color-linkedin"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% if head_info.telegram_url %}
+                    <li>
+                        <a href="https://{{ head_info.telegram_url }}" target="_blank" class="color-telegram">
+                            <i class="fab la-telegram color-telegram"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>

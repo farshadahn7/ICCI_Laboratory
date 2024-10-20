@@ -1,0 +1,63 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}
+    Contact
+{% endblock %}
+{% block content %}
+
+    <main class="main">
+        <!--contact us-->
+        <section class="mt-90">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8 m-auto">
+                        <div class="contact">
+                            <div class="google-map">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1145.4822453500572!2d51.40818310166916!3d35.70375715503946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f8e010d1bda6451%3A0xb68840e07e8e513!2sComputer%20Engineering%20Department!5e0!3m2!1sen!2s!4v1722658287650!5m2!1sen!2s"
+                                        allowfullscreen="" loading="lazy"
+                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                            <form action="{% url 'contact:contact' %}" class="widget-form " method="POST">
+                                {% csrf_token %}
+                                <h5>Feel free to contact any time.</h5>
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert my_message {{ message.tags }}"
+                                             role="alert">{{ message }}</div>
+                                    {% endfor %}
+                                {% endif %}
+                                <div class="form-group">
+                                    <input type="text" name="username" id="name" class="form-control"
+                                           placeholder="Your Name*" required="required">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="email" name="email" id="email" class="form-control"
+                                           placeholder="Your Email*" required="required">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" name="subject" id="subject" class="form-control"
+                                           placeholder="Your Subject*" required="required">
+                                </div>
+
+                                <div class="form-group">
+                                    <textarea name="content" id="message" cols="30" rows="5" class="form-control"
+                                              placeholder="Your Message*" required="required"></textarea>
+                                </div>
+
+                                <button type="submit" name="submit" class="btn-custom">Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+{% endblock %}

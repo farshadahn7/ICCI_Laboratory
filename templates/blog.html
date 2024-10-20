@@ -1,0 +1,117 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load post_tags %}
+{% load category_tag %}
+{% block title %}
+    Blog
+{% endblock %}
+{% block content %}
+
+    <main class="main">
+        <!--category-->
+        <section class="categorie-section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="categorie-title">
+                            <small>
+                                <a href="index.html">Home</a>
+                                <i class="fas fa-angle-right"></i> Blog
+                            </small>
+                            <h3>Category : <span class="categorie text-white"> {{ cat_name_of_page }}</span></h3>
+                            <p>
+                                {% for cat in category %}
+                                    <span><a href="{% url 'posts:post' cat.id %}" class="categorie">{{ cat }}</a></span>
+                                {% endfor %}
+                                <span><a href="{% url 'posts:post' %}" class="categorie">All</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--blog-grid-->
+        <section class="blog-classic">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-9  side-content ">
+                        <div class="theiaStickySidebar">
+                            <div class="row">
+                                <div class="col-lg-12 blog-list">
+                                    {% for post in posts %}
+                                        <!--Post-1-->
+                                        <div class="post-list">
+                                            <div class="post-list-image">
+                                                <a href="{% url 'posts:details' post.id %}">
+                                                    <img src="{{ post.image.url }}" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="post-list-content">
+                                                <div class="entry-cat">
+                                                    <a href="{% url 'posts:post' post.category.id %}" class="categorie">{{ post.category }}</a>
+                                                </div>
+
+                                                <h4 class="entry-title">
+                                                    <a href="{% url 'posts:details' post.id %}">{{ post.title|truncatewords:15|safe }}</a>
+                                                </h4>
+
+                                                <div class="post-exerpt">
+                                                    <p>{{ post.content|truncatewords:20|safe }}</p>
+                                                </div>
+
+                                                <ul class="entry-meta list-inline">
+                                                    <li class="post-date"><span
+                                                            class="dot"></span> {{ post.created_at|date:"M d, Y" }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!--/-->
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            {% if is_paginated %}
+                            <!--pagination-->
+                            <div class="pagination mt-30">
+                                <ul class="list-inline">
+                                    {% if page_obj.has_previous %}
+                                        <li><a href=/blog?page={{ page_obj.previous_page_number }}">
+                                            {{ page_obj.previous_page_number }}
+                                        </a></li>
+                                    {% endif %}
+                                    <li class="active">
+                                        <a href="#">{{ page_obj.number }}</a>
+                                    </li>
+                                    {% if page_obj.has_next %}
+                                        <li><a href=/blog?page={{ page_obj.next_page_number }}">
+                                            {{ page_obj.next_page_number }}
+                                        </a></li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3 max-width side-sidebar">
+                        <div class="theiaStickySidebar">
+
+                            <!--widget-latest-posts-->
+                            {% latest_posts %}
+                            <!--/-->
+
+                            <!--widget-categories-->
+                            {% category_list %}
+                            <!-- -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--/-->
+
+    </main>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends '_base.html' %}
+{% load  static %}
+{% load category_tag %}
+{% load post_tags %}
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+{% block content %}
+
+    <main class="main">
+        <!--post-default-->
+        <section class="mt-70  mb-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-9 side-content">
+                        <div class="theiaStickySidebar">
+                            <!--Post-single-->
+                            <div class="post-single">
+                                <div class="post-single-image">
+                                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid" style="width: 100%">
+                                </div>
+                                <div class="post-single-content">
+                                    <a href="#" class="categorie">{{ post.category.name }}</a>
+                                    <h3 class="title">{{ post.title }}</h3>
+                                    <ul class="entry-meta list-inline">
+{#                                        <li class="post-author-img"><a href="author.html"> <img#}
+{#                                                src="{{ post.image.url }}" alt=""></a></li>#}
+                                        <li class="post-date"><span class="dot"></span> {{ post.created_at|date:"M d, Y" }}</li>
+                                    </ul>
+
+                                </div>
+
+                                <div class="post-single-body">
+                                    {{ post.content|safe }}
+                                </div>
+                            </div> <!--/-->
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 max-width side-sidebar">
+                        <div class="theiaStickySidebar">
+                            <!--widget-latest-posts-->
+
+                            <!--widget-latest-posts-->
+                            {% latest_posts %}
+                            <!--/-->
+
+                            <!--widget-categories-->
+                            {% category_list %}
+                            <!-- -->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--/-->
+
+    </main>
+
+
+{% endblock %}

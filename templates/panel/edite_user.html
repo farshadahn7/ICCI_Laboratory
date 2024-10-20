@@ -1,0 +1,132 @@
+{% extends 'panel/panel_base.html' %}
+{% load  static %}
+{% block panel_content %}
+
+    <div class="main_content_iner overly_inner ">
+        <div class="container-fluid p-0 ">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="page_title_left d-flex align-items-center">
+                            <h3 class="f_s_25 f_w_700 dark_text mr_30">Dashboard</h3>
+                            <ol class="breadcrumb page_bradcam mb-0">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+                                <li class="breadcrumb-item active">Analytic</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="white_card card_height_100 mb_30">
+                        <div class="white_card_header">
+                            <div class="box_header m-0">
+                                <div class="main-title">
+                                    <h3 class="m-0">Edite User </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white_card_body">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+
+{#                                    <div class="col-lg-6">#}
+{##}
+{#                                        <div class="common_input mb_15">#}
+{#                                            <label class="form-label" for="username">username:</label>#}
+{#                                            <input type="text" placeholder="Username" value="{{ user.username }}"#}
+{#                                                   name="username" id="username">#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <div class="common_input mb_15">#}
+{#                                            <label class="form-label" for="first_name">first name:</label>#}
+{#                                            <input type="text" placeholder="First Name" value="{{ user.first_name }}"#}
+{#                                                   name="first_name" id="first_name">#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <label class="form-label" for="last_name">last name:</label>#}
+{#                                        <div class="common_input mb_15">#}
+{#                                            <input type="text" placeholder="Last Name" value="{{ user.last_name }}"#}
+{#                                                   id="last_name" name="last_name">#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="col-lg-6">#}
+{#                                        <label class="form-label" for="email">Email:</label>#}
+{#                                        <div class="common_input mb_15">#}
+{#                                            <input type="Email" placeholder="Email Address" value="{{ user.email }}"#}
+{#                                                   id="email" name="email">#}
+{#                                        </div>#}
+{#                                    </div>#}
+                                    <div class="col-lg-6">
+                                        <label class="form-label" for="status">Status:</label>
+                                        <select class="nice_Select2 nice_Select_line wide" style="display: none;"
+                                                id="status" name="status">
+                                            <option value="{{ student_user.status }}">{{ student_user.status }}</option>
+                                            <option value="current">current</option>
+                                            <option value="Alumni">Alumni</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label class="form-label" for="student_level">Student Level:</label>
+                                        <select class="nice_Select2 nice_Select_line wide" style="display: none;"
+                                                id="student_level" name="student_level">
+                                            <option value="{{ student_user.student_level }}">{{ student_user.student_level }}</option>
+                                            <option value="Master">Master</option>
+                                            <option value="PHD">PHD</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label class="form-label" for="user_role" style="margin-top: 5px">user
+                                            Role</label>
+                                        <select class="nice_Select2 nice_Select_line wide" style="display: none;"
+                                                id="user_role" name="user_role">
+                                            <option value="{{ student_user.user_role }}">{{ student_user.user_role }}</option>
+                                            <option value="student">student</option>
+                                            <option value="admin">admin</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6"></div>
+                                    <div class="col-lg-6">
+                                        <div class="common_input mb_15" style="margin-top: 20px">
+                                            <div class=" cs_check_box">
+                                                {% if student_user.professor_verification %}
+                                                    <input type="checkbox" id="check_box" class="common_checkbox"
+                                                           name="professor_verification"
+                                                           checked>
+                                                {% else %}
+                                                    <input type="checkbox" id="check_box" class="common_checkbox"
+                                                           name="professor_verification">
+                                                {% endif %}
+                                                <label for="check_box"> professor verification </label>
+                                            </div>
+                                            {#                                            <input type="checkbox" placeholder="professor verification" name="professor_verification">#}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class=" mt_30">
+                                            <button type="submit" class="btn_1 radius_btn d-block text-center w-100">
+                                                save changes
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

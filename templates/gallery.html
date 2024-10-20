@@ -1,0 +1,38 @@
+{% extends '_base.html' %}
+{% load static %}
+{% block title %}
+    Gallery
+{% endblock %}
+{% block content %}
+
+    <section class="mt-90 mb-90">
+        <div class="container">
+            <div class="portfolio-menu mt-2 mb-4">
+
+                <ul>
+                    <li class="btn btn-outline-dark active" data-filter="*">All</li>
+                    {% for cat in cats %}
+                        <li class="btn btn-outline-dark" data-filter=".{{ cat.name }}">{{ cat.name }}</li>
+                    {% endfor %}
+                    {#                    <li class="btn btn-outline-dark" data-filter=".lap">Laptops</li>#}
+                    {#                    <li class="btn btn-outline-dark text" data-filter=".selfie">selfie</li>#}
+
+                </ul>
+            </div>
+
+            <div class="portfolio-item row">
+                {% for image in images %}
+                    <div class="item {{ image.category.name }} col-lg-3 col-md-4 col-6 col-sm">
+                        <a href="{{ image.image.url }}"
+                           class="fancylight popup-btn" data-fancybox-group="light">
+                            <img class="img-fluid"
+                                 src="{{ image.image.url }}"
+                                 alt="{{ image.category.name }}">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

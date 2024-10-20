@@ -1,0 +1,184 @@
+{% extends 'panel/panel_base.html' %}
+{% load static %}
+{% block panel_content %}
+
+    <div class="main_content_iner overly_inner ">
+        <div class="container-fluid p-0 ">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="page_title_left d-flex align-items-center">
+                            <h3 class="f_s_25 f_w_700 dark_text mr_30">Dashboard</h3>
+                        </div>
+                        {% if messages  %}
+                            {% for message in messages %}
+                                    <div class="alert my_message {{ message.tags }}">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+
+
+                <div class="col-xl-4 ">
+                    <div class="white_card card_height_100 mb_30 user_crm_wrapper">
+                        <div class="row">
+
+                            <div class="col-lg-6">
+                                <div class="single_crm ">
+                                    <div class="crm_head crm_bg_1 d-flex align-items-center justify-content-between">
+                                        <div class="thumb">
+                                            <img src="{% static 'panel/img/crm/customer.svg' %}" alt>
+                                        </div>
+                                        <a href="{% url 'panel:user_list' %}"><i
+                                                class="fas fa-ellipsis-h f_s_11 white_text"></i></a>
+                                    </div>
+                                    <div class="crm_body">
+                                        <h4>{{ allStudent }}</h4>
+                                        <p><a href="{% url 'panel:user_list' %}">All Students</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="single_crm">
+                                    <div class="crm_head crm_bg_2 d-flex align-items-center justify-content-between">
+                                        <div class="thumb">
+                                            <img src="{% static 'panel/img/crm/infographic.svg' %}" alt>
+                                        </div>
+                                        <a href="{% url 'panel:user_list' 'PHD' %}"><i
+                                                class="fas fa-ellipsis-h f_s_11 white_text"></i></a>
+                                    </div>
+                                    <div class="crm_body">
+                                        <h4>{{ phdCount }}</h4>
+                                        <p><a href="{% url 'panel:user_list' 'PHD' %}">PHD Students</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="single_crm">
+                                    <div class="crm_head crm_bg_3 d-flex align-items-center justify-content-between">
+                                        <div class="thumb">
+                                            <img src="{% static 'panel/img/crm/sqr.svg' %}" alt>
+                                        </div>
+                                        <a href="{% url 'panel:user_list' 'Master' %}"><i
+                                                class="fas fa-ellipsis-h f_s_11 white_text"></i></a>
+                                    </div>
+                                    <div class="crm_body">
+                                        <h4>{{ masterCount }}</h4>
+                                        <p><a href="{% url 'panel:user_list' 'Master' %}">Master Students</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="single_crm">
+                                    <div class="crm_head d-flex align-items-center justify-content-between">
+                                        <div class="thumb">
+                                            <img src="{% static 'panel/img/crm/businessman.svg' %}" alt>
+                                        </div>
+                                        <a href="{% url 'panel:user_list' 'Alumni' %}"><i
+                                                class="fas fa-ellipsis-h f_s_11 white_text"></i></a>
+                                    </div>
+                                    <div class="crm_body">
+                                        <h4>{{ alumniStudent }}</h4>
+                                        <p><a href="{% url 'panel:user_list' 'Alumni' %}">Alumni students</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-4">
+                    <div class="white_card card_height_100 mb_30">
+                        <div class="white_card_header">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12">
+                                    <div class="main-title">
+                                        <h3 class="m-0">New Users</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white_card_body ">
+                            {% for new_user in newStudents %}
+                                <div class="single_user_pil d-flex align-items-center justify-content-between">
+                                    <div class="user_pils_thumb d-flex align-items-center">
+                                        <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50"
+                                                                              src="img/customers/1.png" alt></div>
+                                        <span class="f_s_14 f_w_400 text_color_11">{{ new_user.username }}</span>
+                                    </div>
+                                    {#                                    <div class="user_info">#}
+                                    {#                                        member#}
+                                    {#                                    </div>#}
+                                    {% if user.user_role == 'head' or 'admin' %}
+                                        <div class="action_btns d-flex">
+                                            <a href="{% url 'panel:verify_user' new_user.id %}"
+                                               class="action_btn mr_10"> Verify </a>
+                                            <a href="" class="action_btn"> <i class="fas fa-trash"></i> </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div class="white_card card_height_100 mb_30">
+                        <div class="white_card_header">
+                            <div class="row align-items-center">
+                                <div class="col-lg-12">
+                                    <div class="main-title">
+                                        <h3 class="m-0">Admins</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white_card_body ">
+                            {% for admin in admins %}
+                                <div class="single_user_pil d-flex align-items-center justify-content-between">
+                                    <div class="user_pils_thumb d-flex align-items-center">
+                                        <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50"
+                                                                              src="{{ admin.user_image.url }}" alt="{{ admin.full_name }}">
+                                        </div>
+                                        <span class="f_s_14 f_w_400 text_color_11">{{ admin.username }}</span>
+                                    </div>
+                                    {#                                    <div class="user_info">#}
+                                    {#                                        member#}
+                                    {#                                    </div>#}
+                                    {% if user.user_role == 'head' %}
+                                        <div class="action_btns d-flex">
+                                            <a href="{% url 'panel:edite_user' admin.id %}" class="action_btn mr_10"> <i
+                                                    class="far fa-edit"></i> </a>
+                                            <a href="{% url 'panel:un_role' admin.id %}" class="action_btn mr_10"><i
+                                                    class="fas fa-trash"></i></a>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer_part">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer_iner text-center">
+                        <p>© Copyright <a href="#">Farshadahn</a>, All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+

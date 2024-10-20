@@ -1,0 +1,30 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load account_tags %}
+{% block title %}
+    Current
+{% endblock %}
+{% block content %}
+    <main class="main">
+        <section class="mt-70  mb-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="widget my_widget">
+                        {% get_head_info %}
+                    </div>
+                    <!--/-->
+                    <hr class="mt-30 mb-30">
+                    <!--Current PHD Students-->
+
+                    {% get_current_phd_info %}
+
+                    <hr class="mt-30 mb-30">
+                    <!--Current Ms Students-->
+
+                    {% get_current_info %}
+
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends 'panel/panel_base.html' %}
+{% load  static %}
+{% block panel_content %}
+
+    <div class="main_content_iner overly_inner ">
+        <div class="container-fluid p-0 ">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="page_title_box d-flex flex-wrap align-items-center justify-content-between">
+                        <div class="page_title_left d-flex align-items-center">
+                            <h3 class="f_s_25 f_w_700 dark_text mr_30">Dashboard</h3>
+                            <ol class="breadcrumb page_bradcam mb-0">
+                                <li class="breadcrumb-item"><a href="{% url 'panel:panel_home' %}">Home</a></li>
+                                <li class="breadcrumb-item active">
+                                    {% if post %}
+                                        {{ post.title }}
+                                    {% else %}
+                                        New Post
+                                    {% endif %}
+                                </li>
+                            </ol>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="white_card card_height_100 mb_30">
+                        <div class="white_card_header">
+                            <div class="box_header m-0">
+                                <div class="main-title">
+                                    <h3 class="m-0">
+                                        {% if post %}
+                                            {{ post.title }}
+                                        {% else %}
+                                            New Post
+                                        {% endif %}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="white_card_body">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {#                                <div class="row">#}
+                                {#                                    <div class="col-lg-6">#}
+                                {##}
+                                {#                                        <div class="common_input mb_15">#}
+                                {#                                            <label class="form-label" for="title">title:</label>#}
+                                {#                                            <input type="text" placeholder="title"#}
+                                {#                                                   value="{% if post %}{{ post.title }}{% endif %}"#}
+                                {#                                                   name="title" id="title">#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="col-lg-12">#}
+                                {##}
+                                {#                                        <div class="common_input mb_15">#}
+                                {#                                            <label class="form-label" for="content">content:</label>#}
+                                {#                                            <textarea id="content" name="content"#}
+                                {#                                                      value="{% if post %}{{ post.content }}{% endif %}">{% if post %}#}
+                                {#                                                {{ post.content }}{% endif %}</textarea>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="col-lg-12">#}
+                                {#                                        <div class="box_header m-0">#}
+                                {#                                            <div class="main-title">#}
+                                {#                                                <h3 class="m-0">Upload Image</h3>#}
+                                {#                                            </div>#}
+                                {#                                        </div>#}
+                                {#                                        <div class=" mb-0">#}
+                                {#                                            <span>Currently:</span><a#}
+                                {#                                                href="{{ post.image.url }}">{{ post.image.url }}</a>#}
+                                {#                                            <br>#}
+                                {#                                            <input type="file" name="image"#}
+                                {#                                                   value="{% if post %}{{ post.image.url }}{% endif %}">#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="col-lg-12">#}
+                                {#                                        <div class="col-lg-6">#}
+                                {#                                            <label class="form-label" for="category">Category</label>#}
+                                {#                                            <select class="nice_Select2 nice_Select_line wide" style="display: none;"#}
+                                {#                                                    id="category" name="category">#}
+                                {#                                                {% if post %}#}
+                                {#                                                    <option value="{{ post.category }}">{{ post.category }}</option>#}
+                                {#                                                    {% for cat in category %}#}
+                                {#                                                        <option value="{{ cat }}">{{ cat }}</option>#}
+                                {#                                                    {% endfor %}#}
+                                {#                                                {% else %}#}
+                                {#                                                    <option>Choose...</option>#}
+                                {#                                                    {% for cat in category %}#}
+                                {#                                                        <option value="{{ cat }}">{{ cat }}</option>#}
+                                {#                                                    {% endfor %}#}
+                                {#                                                {% endif %}#}
+                                {#                                            </select>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="col-lg-6">#}
+                                {#                                        <div class="common_input mb_15" style="margin-top: 20px">#}
+                                {#                                            <div class=" cs_check_box">#}
+                                {#                                                {% if post.status %}#}
+                                {#                                                    <input type="checkbox" id="check_box" class="common_checkbox"#}
+                                {#                                                           name="status"#}
+                                {#                                                           checked>#}
+                                {#                                                {% else %}#}
+                                {#                                                    <input type="checkbox" id="check_box" class="common_checkbox"#}
+                                {#                                                           name="status">#}
+                                {#                                                {% endif %}#}
+                                {#                                                <label for="check_box"> status </label>#}
+                                {#                                            </div>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {##}
+                                {#                                    <div class="col-12">#}
+                                {#                                        <div class=" mt_30">#}
+                                {#                                            <button type="submit" class="btn_1 radius_btn d-block text-center w-100">#}
+                                {#                                                publish#}
+                                {#                                            </button>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {##}
+                                {#                                </div>#}
+                                <div class="row">
+                                    {{ form.media }}
+                                    {% for field in form %}
+                                        {% if field.label == 'Image' %}
+                                            <div class=" mb-3">
+                                                <label class="form-label"
+                                                       for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                                                <br>
+                                                {{ field }}
+                                            </div>
+                                        {% elif field.label == 'Status' %}
+                                            <div class="col-lg-12">
+                                                <div class=" form-check">
+                                                    {{ field }}
+                                                    <label class="form-label form-check-label" style="font-size: 18px"
+                                                           for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+                                                </div>
+
+                                            </div>
+                                        {% elif field.label == 'Content' %}
+                                            <div class="col-12">
+                                                <div class="white_box mb_10">
+                                                    <div class="box_header ">
+                                                        <div class="main-title">
+                                                            <h3 class="mb-0">Content</h3>
+                                                        </div>
+                                                    </div>
+                                                    {{ field }}
+                                                </div>
+                                            </div>
+                                        {% elif field.label == 'Category' %}
+                                            <h6 class="card-subtitle mb-2">Category</h6>
+                                            <div class="input-group mb-3">
+                                                <label class="input-group-text"
+                                                       for="{{ field.id_for_label }}">Options</label>
+                                                {{ field }}
+                                            </div>
+                                        {% else %}
+                                            <div class="col-lg-12">
+                                                <div class="common_input mb_15">
+                                                    <label class="form-label"
+                                                           for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                                                    {{ field }}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+
+                                    {% endfor %}
+
+
+
+                                    <div class="col-12">
+                                        <div class=" mt_30">
+                                            <button type="submit" class="btn_1 radius_btn d-block text-center w-100">
+                                                publish
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

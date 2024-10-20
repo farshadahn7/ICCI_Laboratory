@@ -1,0 +1,268 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="ICCI laboratory of AmirKabir university Of Tehran">
+    <meta name="keywords" content="ICCI, PIM, Laboratory,Hamed Farbeh ">
+    <meta name="author" content="Farshad AHN">
+    <!--fontawesome-->
+    <script src="https://kit.fontawesome.com/5ec4702a9b.js" crossorigin="anonymous"></script>
+
+    <!-- favicon -->
+    <link rel="icon" sizes="16x16" href="{% static 'img/favicon.png' %}">
+
+    <!-- Title -->
+    <title> {% block title %}{% endblock %} </title>
+
+    <!--Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/line-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/swiper.min.css' %}">
+
+    <!-- main style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+<!-- wrapper -->
+<div id="wrapper" class="wrapper">
+    <!--loading -->
+    <div class="loading">
+        <div class="circle"></div>
+    </div>
+    <!--/-->
+
+    <!-- Header -->
+    <header class="header fixed-top">
+        <div class="header-main navbar-expand-xl">
+            <div class="container-fluid">
+                <div class="header-main">
+                    <!-- logo -->
+                    <div class="site-branding">
+                        <a class="dark-logo" href="{% url 'pages:home' %}">
+                            <img src="{% static 'img/logo/ICCI_logo_tran.png' %}" height="44" width="150" alt="">
+                        </a>
+                        <a class="light-logo" href="{% url 'pages:home' %}">
+                            <img src="{% static 'img/logo/logo_white_tran.png' %}" height="44" width="150" alt="">
+                        </a>
+                    </div><!--/-->
+
+                    <div class="main-menu header-navbar">
+                        <nav class="navbar">
+                            <!--navbar-collapse-->
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ">
+                                    <!--Homes -->
+                                    <li class="nav-item ">
+                                        <a class="nav-link " href="{% url 'pages:home' %}">Home</a>
+                                    </li>
+
+                                    <!--People -->
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+                                           id="navbarDropdown2" role="button" data-bs-toggle="dropdown"
+                                           aria-expanded="false">People</a>
+                                        <ul class="dropdown-menu ">
+                                            <li><a class="dropdown-item"
+                                                   href="{% url 'accounts:current' %}">Current </a></li>
+                                            <li><a class="dropdown-item " href="{% url 'accounts:alumni' %}">Alumni </a>
+                                            </li>
+                                            <hr>
+                                            <li><a class="dropdown-item" href="https://ce.aut.ac.ir/~farbeh/">Hamed
+                                                Farbeh</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!--Research-->
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'publication:publication_list' %}">
+                                            Publication </a>
+                                    </li>
+
+                                    <!--Blog-->
+                                    <li class="nav-item ">
+                                        <a class="nav-link " href="{% url 'posts:post' %}"> Blog </a>
+                                    </li>
+
+                                    <!--contact -->
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'contact:contact' %}"> contact </a>
+                                    </li>
+                                     <!--Gallery -->
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'pages:gallery' %}"> Gallery </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--/-->
+                        </nav>
+                    </div>
+
+                    <!-- header actions -->
+                    <div class="header-action-items">
+
+                        <!--theme-switch-->
+                        <div class="theme-switch-wrapper switch-icon" style="margin-right: 15px">
+                            <label class="theme-switch" for="checkbox">
+                                <input type="checkbox" id="checkbox">
+                                <span class="slider round ">
+                                    <i class="lar la-sun icon-light"></i>
+                                    <i class="lar la-moon icon-dark"></i>
+                                </span>
+                            </label>
+                        </div>
+
+                        <div class="header-action-items">
+                            <div class="main-menu header-navbar">
+                                <nav class="navbar">
+                                    <!--navbar-collapse-->
+                                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                        <ul class="navbar-nav">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="javascript:void(0)"
+                                                   id="navbarDropdown1" role="button" data-bs-toggle="dropdown"
+                                                   aria-expanded="false"><i class="fa fa-user"
+                                                                            style="font-size:18px;color: #131315;"
+                                                                            aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu ">
+                                                    {% if user.is_authenticated %}
+                                                        {% if user.user_role == 'admin' %}
+                                                            <li><a class="dropdown-item "
+                                                                   href="{% url 'panel:panel_home' %}"> <i
+                                                                    class="fas fa-user"></i> profile </a></li>
+                                                        {% else %}
+                                                            <li><a class="dropdown-item "
+                                                                   href="{% url 'panel:profile' user.id %}"> <i
+                                                                    class="fas fa-user"></i> profile </a></li>
+                                                        {% endif %}
+                                                        <li><a class="dropdown-item "
+                                                               href="{% url 'accounts:logout_view' %}"> <i
+                                                                class="fas fa-sign-out"></i> log out </a></li>
+                                                    {% else %}
+                                                        <li><a class="dropdown-item "
+                                                               href="{% url 'accounts:login_view' %}"> <i
+                                                                class="fas fa-sign-in"></i> Login </a></li>
+                                                        <li><a class="dropdown-item "
+                                                               href="{% url 'accounts:signup_view' %}"><i
+                                                                class="fas fa-user-plus"></i> Signup </a></li>
+                                                    {% endif %}
+
+
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                            <!--navbar-toggler-->
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                    aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
+
+
+                        {#                        <!--navbar-toggler-->#}
+                        {#                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"#}
+                        {#                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"#}
+                        {#                                aria-expanded="false" aria-label="Toggle navigation">#}
+                        {#                            <span class="navbar-toggler-icon"></span>#}
+                        {#                        </button>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header><!--/-->
+    {% block content %}{% endblock %}
+
+    <!--footer-->
+    <footer class="footer">
+        <div class="container-fluid">
+            <div class="row">
+                <section class="newslettre">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-10 col-sm-11 m-auto">
+                                <div class="newslettre-width text-center">
+                                    <div class="newslettre-info">
+                                        <h3 class="title">AmirKabir university of Technology</h3>
+                                        <p> If the hardware is the brain and the sinew of our products, the software in
+                                            them is their souls.</p>
+                                        <h3 class="title">Contact</h3>
+                                        <span>+98(21)64542729</span>
+                                        <span>Room: 4xx, Department of Computer Engineering</span>
+                                        <span>Amirkabir Univercity of Technology,</span>
+                                        <span>Hafez Avenue, Tehran,Iran</span>
+                                    </div>
+                                    <div class="site-branding mt-30">
+                                        <a class="dark-logo" href="{% url 'pages:home' %}">
+                                            <img src="{% static 'img/logo/logo_white_tran.png' %}" height="44"
+                                                 width="150"
+                                                 alt="">
+                                        </a>
+                                    </div><!--/-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <div class="col-lg-12">
+                    <div class="copyright">
+                        <p>© Copyright <a href="#">Farshadahn</a>, All rights reserved.</p>
+                    </div>
+                    <div class="back">
+                        <a href="#" class="back-top">
+                            <i class="fas fa-arrow-up"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--/-->
+</div>
+
+<!--plugins -->
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/swiper.min.js' %}"></script>
+<script src="{% static 'js/masonry.min.js' %}"></script>
+<script src="{% static 'js/theia-sticky-sidebar.min.js' %}"></script>
+{#<script src="{% static 'js/ajax-contact.js' %}"></script>#}
+<script src="{% static 'js/switch.js' %}"></script>
+
+<!-- JS main  -->
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+<script>
+$('.my_message').hide().fadeIn(500).delay(2000).fadeOut(500);  
+</script>
+{##}
+{#    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"#}
+{#          id="bootstrap-css">#}
+{#    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>#}
+
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+
+</body>
+</html>
+

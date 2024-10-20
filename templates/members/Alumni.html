@@ -1,0 +1,31 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load account_tags %}
+{% block title %}
+    Alumni Members
+{% endblock %}
+{% block content %}
+    <main class="main">
+        <section class="mt-70  mb-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="widget my_widget">
+                        {% get_head_info %}
+                    </div>
+                    <!--/-->
+{#                    <hr class="mt-30 mb-30">#}
+{#                    <!--Alumni PHD Students-->#}
+{#                    #}
+{#                    {% get_alumni_phd_info %}#}
+                    <hr class="mt-30 mb-30">
+                    <!--Alumni Ms Students-->
+                    {#                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6  mt-40">#}
+                    {#                        <div class="widget">#}
+                    {% get_alumni_info %}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

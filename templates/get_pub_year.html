@@ -1,0 +1,13 @@
+{% load static %}
+<div class="widget">
+    <div class="section-title">
+        <h5>Publication Year</h5>
+    </div>
+    <ul class="widget-categories">
+        {% for year in years %}
+            <li>
+                <a href="{% url 'publication:publication_list' year  %}" class="categorie">{{ year }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

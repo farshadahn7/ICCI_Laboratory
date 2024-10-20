@@ -1,0 +1,53 @@
+{% extends 'panel/panel_base.html' %}
+{% load  static %}
+{% block panel_content %}
+
+    <div class="main_content_iner ">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="dashboard_header mb_50">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="dashboard_header_title">
+                                    <h3> Default Dashboard</h3>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="dashboard_breadcam text-end">
+                                    <p><a href="{% url 'panel:panel_home' %}">Dashboard</a> <i class="fas fa-caret-right"></i> {{ user.full_name }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-4 box-col-6">
+                    <div class="card custom-card">
+                        <div class="card-header"><img class="img-fluid" src="{% static 'panel/img/profilebox/2.jpg' %}" alt
+                                                      data-original-title title></div>
+                        <div class="card-profile"><img class="rounded-circle" src="{% if user.user_image %}{{ user.user_image.url }}{% else %}{% static 'img/user/avatar.jpg' %}{% endif %}" alt="{{ user.full_name }}"
+                                                       data-original-title title></div>
+                        <ul class="card-social">
+                            <li><a href="{{ user.telegram_url }}" data-original-title title><i class="fab fa-telegram"></i></a></li>
+                            <li><a href="{{ user.linkedin_url }}" data-original-title title><i class="fab fa-linkedin"></i></a></li>
+                        </ul>
+                        <div class="text-center profile-details">
+                            <h4><a href="{% url 'panel:profile_update' user.id %}">{{ user.full_name }}</a></h4>
+                            <h6>{{ user.position }}</h6>
+                            <h6>{{ user.email }}</h6>
+                        </div>
+                        <div class="card-footer row">
+                            <div class="col-12 col-sm-12">
+                                <h6>{{ user.bio }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

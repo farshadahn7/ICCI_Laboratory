@@ -1,0 +1,146 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load post_tags %}
+{% load category_tag %}
+{% block title %}
+    Home
+{% endblock %}
+{% block content %}
+
+    <!--main-->
+    <main class="main">
+        <div class="container ">
+            <div class="sign mt-3">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert my_message message_box {{ message.tags }}" role="alert">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <!--slider-style5-->
+        <div class="container-fluid">
+            <div class="slider-style5 ">
+                <div class="swiper-wrapper">
+                    <!--slider-1-->
+                    <div class="slider-item  swiper-slide"
+                         style="background-image: url({% static 'img/pic/s1.jpg' %});">
+                        <div class="container ">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-12 m-auto">
+                                    <div class="slider-item-content">
+                                        <h1 class="entry-title">
+                                            <a href="#">Amirkabir University of
+                                                Technology(Tehran Poly-technique)</a>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--slider-2-->
+                    <div class="slider-item  swiper-slide"
+                         style="background-image: url({% static 'img/pic/s2.jpg' %});">
+                        <div class="container ">
+                            <div class="row">
+                                <div class="col-lg-8 m-auto">
+                                    <div class="slider-item-content">
+                                        <h1 class="entry-title">
+                                            <a href="post-default.html">Computer Engineering Department</a>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--pagination-->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+
+        <!--blog-grid-->
+        <section class="blog-grid">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-9 mt-30 side-content">
+                        <div class="theiaStickySidebar">
+                            <div class="row masonry-items">
+                                {% for post in posts %}
+                                    <!--Posts-->
+                                    <div class="col-lg-6 col-md-6 masonry-item">
+                                        <div class="post-card ">
+                                            <div class="post-card-image">
+                                                <a href="{% url 'posts:details' post.id %}">
+                                                    <img src="{{ post.image.url }}" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="post-card-content">
+                                                <div class="entry-cat">
+                                                    <a href="#" class="categorie">{{ post.category.name }}</a>
+                                                </div>
+
+                                                <h5 class="entry-title">
+                                                    <a href="{% url 'posts:details' post.id %}">{{ post.title }}</a>
+                                                </h5>
+
+                                                <div class="post-exerpt">
+                                                    <p>{{ post.content|truncatewords:15|safe }} </p>
+                                                </div>
+
+                                                <ul class="entry-meta list-inline">
+                                                    <li class="post-date"><span
+                                                            class="dot"></span> {{ post.created_at|date:"M d, Y" }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--/-->
+                                {% endfor %}
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12" style="text-align: center;margin-bottom: 30px">
+                                    <a href="{% url 'posts:post' %}" class="btn btn-custom">Show more....</a>
+                                </div>
+
+                            </div>
+
+                            <!--pagination-->
+                            {#                            <div class="row">#}
+                            {#                                <div class="col-lg-12">#}
+                            {#                                    <div class="pagination ">#}
+                            {#                                        <ul class="list-inline">#}
+                            {#                                            <li class="active"><a href="#">1</a></li>#}
+                            {#                                            <li><a href="#">2</a></li>#}
+                            {#                                            <li><a href="#">3</a></li>#}
+                            {#                                            <li><a href="#">4</a></li>#}
+                            {#                                            <li><a href="#"><i class="fas fa-arrow-right"></i></a></li>#}
+                            {#                                        </ul>#}
+                            {#                                    </div>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                        </div>
+                    </div>
+                    <div class="col-xl-3 max-width side-sidebar">
+                        <div class="theiaStickySidebar">
+                            <!--widget-latest-posts-->
+                            {% latest_posts %}
+                            <!--/-->
+
+                            <!--widget-categories-->
+                            {% category_list %}
+                            <!-- -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section><!--/-->
+    </main>
+
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load pub_year %}
+{% block title %}
+    Publications
+{% endblock %}
+{% block content %}
+
+    <main class="main">
+        <!--post-default-->
+        <section class="mt-60  mb-30">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-xl-9 order-xl-2 order-lg-1 order-md-1 order-sm-1 order-1 side-content">
+                        <div class="theiaStickySidebar">
+                            {% for publication in publications %}
+                                <table class="table table-bordered">
+                                    <thead style="background: #0a53be; color: white;text-align: center">
+                                    <tr>
+                                        <th scope="col">year</th>
+                                        <th scope="col" colspan="2" class="align-content-center">title</th>
+                                        <th scope="col">publication</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody style="text-align: center">
+                                    <tr class="table-active">
+                                        <th scope="row">{{ publication.published_year }}</th>
+                                        {% if publication.file.url is not None %}
+                                            <td colspan="2"><a href="{{ publication.file.url }}"
+                                                               class="btn-link">{{ publication.title }}</a></td>
+                                        {% endif %}
+                                        <td colspan="2"><a href="#"
+                                                           class="btn-link">{{ publication.title }}</a></td>
+                                        <td>{{ publication.published_at }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Authors</th>
+                                        <td>{{ publication.author }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">published at</th>
+                                        <td colspan="2" class="table-active">{{ publication.published_at_detail }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 order-xl-1  order-md-2 order-sm-2  order-2 max-width side-sidebar">
+                        <div class="theiaStickySidebar">
+                            <!--widget-latest-posts-->
+
+                            <!--widget-categories-->
+                            {% pub_year %}
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section><!--/-->
+
+    </main>
+
+{% endblock %}
